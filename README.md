@@ -1,38 +1,35 @@
-# Rock-Paper-Scissors
 import random
 
-def determine_winner(user, computer):
-    if user == computer:
-        return "It's a tie!"
-    elif (user == "rock" and computer == "scissors") or \
-         (user == "scissors" and computer == "paper") or \
-         (user == "paper" and computer == "rock"):
-        return "You win!"
-    else:
-        return "Computer wins!"
-
-def main():
+def play_game():
     choices = ["rock", "paper", "scissors"]
 
-    print("🎮 Welcome to Rock-Paper-Scissors Game!")
-
     while True:
-        user_choice = input("\nEnter your move (rock/paper/scissors): ").lower()
+        print("\n--- Rock-Paper-Scissors Game ---")
+        user_choice = input("Enter rock, paper, or scissors (or 'exit' to quit): ").lower()
 
+        # Exit condition
+        if user_choice == "exit":
+            print("Thanks for playing! Goodbye.")
+            break
+
+        # Validate input
         if user_choice not in choices:
-            print("Invalid move. Please choose from rock, paper, or scissors.")
+            print("Invalid choice! Please select rock, paper, or scissors.")
             continue
 
+        # Computer choice
         computer_choice = random.choice(choices)
         print(f"Computer chose: {computer_choice}")
 
-        result = determine_winner(user_choice, computer_choice)
-        print(result)
-
-        replay = input("Do you want to play again? (yes/no): ").lower()
-        if replay != "yes":
-            print("Thanks for playing!")
-            break
+        # Game logic
+        if user_choice == computer_choice:
+            print("It's a tie!")
+        elif (user_choice == "rock" and computer_choice == "scissors") or \
+             (user_choice == "paper" and computer_choice == "rock") or \
+             (user_choice == "scissors" and computer_choice == "paper"):
+            print("You win!")
+        else:
+            print("Computer wins!")
 
 if __name__ == "__main__":
-    main()
+    play_game()
